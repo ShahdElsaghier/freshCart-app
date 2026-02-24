@@ -133,7 +133,7 @@ export default function Home() {
       <section className="mt-10">
         <div className="container w-[90%] mx-auto">
           <h2 className="text-2xl font-bold mb-5">Shop by Category</h2>
-          <CategorySlider autoplay />
+          <CategorySlider /> {/* Removed autoplay prop */}
         </div>
       </section>
 
