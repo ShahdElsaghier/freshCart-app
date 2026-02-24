@@ -60,14 +60,26 @@ export default function BrandPage() {
         <p className="text-gray-600">No products found for this brand.</p>
       ) : (
         <div className="flex flex-wrap -mx-2">
-          {products.map((product) => (
-            <div
-              key={product.id}
-              className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 px-2 mb-6"
-            >
-              <ProductCard product={product} />
-            </div>
-          ))}
+          {products.map((product) => {
+            // Transform product to match what ProductCard expects
+            const productForCard = {
+              _id: product.id,
+              title: product.title,
+              price: product.price,
+              imageCover: product.images?.[0] || "https://via.placeholder.com/400", // Fallback image if none exists
+              ratingsAverage: product.ratingsAverage,
+              category: { name: brand.name } // Optional: add category info
+            };
+            
+            return (
+              <div
+                key={product.id}
+                className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 px-2 mb-6"
+              >
+                <ProductCard product={productForCard} />
+              </div>
+            );
+          })}
         </div>
       )}
     </div>
