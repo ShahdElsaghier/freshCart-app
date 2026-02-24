@@ -118,12 +118,19 @@ export default function ProductDetails() {
     }
   };
 
-  //Delete Review
+  //Delete Review - FIXED
   const handleDeleteReview = async (reviewId: string) => {
+    if (!token) {
+      toast.error("You must be logged in to delete a review");
+      return;
+    }
+
     try {
       const res = await fetch(`https://ecommerce.routemisr.com/api/v1/reviews/${reviewId}`, {
         method: "DELETE",
-        headers: { token },
+        headers: { 
+          token: token // Now token is guaranteed to be string, not null
+        },
       });
       if (!res.ok) throw new Error("Failed to delete review");
 
