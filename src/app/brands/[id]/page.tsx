@@ -62,7 +62,7 @@ export default function BrandPage() {
         <div className="flex flex-wrap -mx-2">
           {products.map((product) => (
             <div
-              key={product.id || product._id}
+              key={product.id}
               className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 px-2 mb-6"
             >
               <ProductCard product={product} />
