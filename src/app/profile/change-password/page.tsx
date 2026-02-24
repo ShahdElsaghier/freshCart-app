@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { useAuth } from "../../../../context/AuthContext";
 
 export default function ChangePasswordPage() {
-  const { token, setToken } = useAuth(); 
+  const { token, login } = useAuth(); // Changed from setToken to login
   const router = useRouter();
 
   const [currentPassword, setCurrentPassword] = useState("");
@@ -53,14 +53,16 @@ export default function ChangePasswordPage() {
         throw new Error(data.message || "Failed to change password");
       }
 
-      //API returns new token after password change
+      // API returns new token after password change
       if (data.token) {
-        localStorage.setItem("token", data.token);
-        setToken(data.token);
+        // Get userId from localStorage or from data if available
+        const userId = localStorage.getItem("userId") || "";
+        
+        // Update token in context and localStorage using login function
+        login(data.token, userId);
       }
 
       toast.success("Password changed successfully");
-
       router.push("/profile");
     } catch (error: any) {
       toast.error(error.message);
