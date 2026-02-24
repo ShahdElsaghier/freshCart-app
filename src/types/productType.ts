@@ -1,5 +1,5 @@
 import { CategoryType } from "./categoryType";  
-import { BrandType } from "./BrandType";  
+import { BrandType } from "./brandType";  
 import { SubcategoryType } from "./subcategoryType";  
 
 
